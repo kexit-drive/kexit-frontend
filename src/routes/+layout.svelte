@@ -1,27 +1,15 @@
 <script>
-  import { fetchService } from "$lib/fetchService";
+  import '../nullstyles.css';
+  import NavBar from "../lib/components/navbar/NavBar.svelte";
 
-  async function getCurrentUser() {
-    try {
-      const user = await fetchService("/user/current", "GET");
-      console.log(user);
-    } catch(error) {
-      console.log("exception raised" + error);
-      return 
-    }
-  }
-
-  // let userAuthorized = null;
-  // (async () => {await getCurrentUser();})();
+  const navLinks = [
+    { href: "/", text: "Home" },
+    { href: "/about", text: "About" },
+    { href: "/me", text: "Profile" },
+    { href: "/api/logout", text: "Logout" },
+  ];
 </script>
 
-<nav>
-  <button on:click={getCurrentUser}>User</button>
-  <a href="/">Home</a>
-  <a href="/about">About</a>
-  <a href="/settings">Settings</a>
-  <a href="/me">Profile</a>
-  <a href="/api/logout">Logout</a>
-</nav>
+<NavBar links={navLinks} />
 
 <slot></slot>

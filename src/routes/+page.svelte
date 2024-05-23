@@ -1,32 +1,28 @@
 <script>
 	import { fetchService } from '$lib/fetchService';
-	import { PUBLIC_BASE_URL } from '$env/static/public';
-  import PlayerComponent from '../lib/components/PlayerComponent.svelte';
-  
-  let fileId = "664615ab9a66376c10e218e0";
-  let mediaType = "";
-  let show = false;
-  $: url = `${PUBLIC_BASE_URL}/file/${fileId}/play` 
+  import { onMount } from "svelte";
+  import FileCard from "../lib/components/file/FileCard.svelte";
 
-  async function getFileMediaType() {
-    const responseJson = await fetchService(`/file/${fileId}/player-content-type`, "GET");
-    return await responseJson.dataType;
-  }
-
-  async function playFile() {
-    mediaType = await getFileMediaType();
-    show = true
-    console.log(fileId);
-    console.log(url);
-    console.log(mediaType);
-  }
+  let files = [];
+  onMount(async () => {
+    files = await fetchService("/file", "GET");
+  });
 </script>
 
 <main>
-  <input type="text" bind:value={fileId} placeholder="fileId"/>
-  <button on:click={playFile}>play file</button>
-  {#if show}
-    <PlayerComponent mediaType={mediaType} url={url}/>
-  {/if}
-  
+  <button on:click={() => console.log("fndjknfkds")}>Import from google drive</button>
+  <div class="file-list">
+    {#each files as file}
+      <FileCard title={file.filename} fileId={file.id} />
+    {/each}
+  </div>
 </main>
+
+<style>
+  .file-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 16px;
+  }
+</style>
