@@ -1,49 +1,48 @@
-<!-- <script>
-	import GoogleLoginButton from './../../lib/components/googlebutton/GoogleLoginButton.svelte';
-  import Modal from '../../lib/components/modal/Modal.svelte';
+<script>
+  let fileInput;
 
-  let isModalOpen = false;
-
-  function openModal() {
-    isModalOpen = true;
+  function handleFileUpload() {
+    fileInput.click();
   }
 
-  function closeModalCallback() {
-    console.log('Modal closed');
-    isModalOpen = false;
+  function onFileSelected(event) {
+    const file = event.target.files[0];
+    if (file) {
+      // Handle the selected file (e.g., upload it to a server or process it)
+      console.log('Selected file:', file);
+    }
   }
 </script>
 
 <style>
-  .container {
-    padding: 16px;
-    text-align: center;
-  }
-
-  button {
-    padding: 0.5rem 1rem;
+  .import-button {
+    padding: 0.75rem 1.5rem;
+    margin: 5px;
     font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #0a951f;
     color: white;
     border: none;
     border-radius: 4px;
-    margin-top: 1rem;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  .import-button:hover {
+    background-color: #357ae8;
+  }
+
+  .import-button:active {
+    background-color: #3367d6;
+  }
+
+  .hidden-file-input {
+    display: none;
   }
 </style>
 
-<div class="container">
-  <h1>My Svelte App</h1>
-  <button on:click="{openModal}">Open Modal</button>
-
-  <Modal isOpen={isModalOpen} closeCallback={closeModalCallback}>
-    <h2>Modal Title</h2>
-    <p>This is a modal window with a close callback.</p>
-  </Modal>
-</div> -->
-
-<script>
-  import GoogleLoginButton from '../../lib/components/googlebutton/GoogleLoginButton.svelte';
-</script>
-
-<GoogleLoginButton/>
+<button class="import-button" on:click={handleFileUpload}>
+  Upload file
+</button>
+<input type="file" class="hidden-file-input" bind:this={fileInput} on:change={onFileSelected} />

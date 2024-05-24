@@ -39,18 +39,16 @@
 <div class="file-card">
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-  <!-- <div class="test"> -->
-    <img
-      on:click={playFile}
-      src="https://cdn-icons-png.freepik.com/512/183/183625.png"
-      alt="File Icon"
-      class="file-icon"
-    />
-    <div class="file-info">
-      <div><span class="file-title">{title}</span></div>
-      <div class="file-id">ID: {fileId}</div>
-    </div>
-  <!-- </div> -->
+  <img
+    on:click={playFile}
+    src="https://cdn-icons-png.freepik.com/512/183/183625.png"
+    alt="File Icon"
+    class="file-icon"
+  />
+  <div class="file-info">
+    <div><span class="file-title">{title}</span></div>
+    <div class="file-id">ID: {fileId}</div>
+  </div>
 </div>
 
 <Modal isOpen={isModalOpen} closeCallback={closeModalCallback}>

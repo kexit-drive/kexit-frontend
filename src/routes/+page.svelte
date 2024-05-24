@@ -2,6 +2,8 @@
 	import { fetchService } from '$lib/fetchService';
   import { onMount } from "svelte";
   import FileCard from "../lib/components/file/FileCard.svelte";
+  import GoogleDriveImportButton from '../lib/components/googlebutton/GoogleDriveImportButton.svelte';
+  import UploadFileButton from '../lib/components/googlebutton/UploadFileButton.svelte';
 
   let files = [];
   onMount(async () => {
@@ -10,7 +12,8 @@
 </script>
 
 <main>
-  <button on:click={() => console.log("fndjknfkds")}>Import from google drive</button>
+  <GoogleDriveImportButton/>
+  <UploadFileButton/>
   <div class="file-list">
     {#each files as file}
       <FileCard title={file.filename} fileId={file.id} />
