@@ -3,6 +3,7 @@
   import PlayerComponent from "../PlayerComponent.svelte";
   import { PUBLIC_BASE_URL } from "$env/static/public";
   import Modal from "../modal/Modal.svelte";
+
   export let title;
   export let fileId;
 

@@ -1,4 +1,6 @@
 <script>
+  import DirectoryCard from "$lib/components/file/DirectoryCard.svelte";
+
   let fileInput;
 
   function handleFileUpload() {
@@ -42,6 +44,8 @@
   }
 </style>
 
+
+<DirectoryCard name="Direc1" directoryId="324321431"/>
 <button class="import-button" on:click={handleFileUpload}>
   Upload file
 </button>

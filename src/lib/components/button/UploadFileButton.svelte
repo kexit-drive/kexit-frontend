@@ -1,5 +1,6 @@
 <script>
   import { fetchService } from "$lib/fetchService";
+  import {page} from "$app/stores";
 
   let fileInput;
 
@@ -12,16 +13,17 @@
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
-
+      const directoryId = $page.url.searchParams.get('directoryId');
+      const url = `/file/upload${directoryId === null ? "" : "?directoryId=" + directoryId}`;
       try {
         const response = await fetchService(
-          "/file/upload?directoryId=1234567890",
+          url,
           "POST",
           {
             body: formData,
           }
         );
-        console.log(`File sucessuflly uploaded: ${response}`);
+        console.log(`File successfully uploaded: ${response}`);
       } catch (error) {
         console.error("Error uploading file:", error);
       }
