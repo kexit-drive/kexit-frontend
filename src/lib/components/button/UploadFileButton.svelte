@@ -2,6 +2,8 @@
   import { fetchService } from "$lib/fetchService";
   import {page} from "$app/stores";
 
+  export let onUploadCallback;
+
   let fileInput;
 
   async function handleFileUpload() {
@@ -16,13 +18,8 @@
       const directoryId = $page.url.searchParams.get('directoryId');
       const url = `/file/upload${directoryId === null ? "" : "?directoryId=" + directoryId}`;
       try {
-        const response = await fetchService(
-          url,
-          "POST",
-          {
-            body: formData,
-          }
-        );
+        const response = await fetchService(url, "POST", {body: formData});
+        await onUploadCallback();
         console.log(`File successfully uploaded: ${response}`);
       } catch (error) {
         console.error("Error uploading file:", error);

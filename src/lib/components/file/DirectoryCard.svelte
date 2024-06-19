@@ -1,8 +1,10 @@
 <script>
   import { goto } from '$app/navigation';
+  import DeleteButton from "$lib/components/button/DeleteButton.svelte";
 
   export let name;
   export let directoryId;
+  export let onDeleteCallback;
 
   const icon = "https://banner2.cleanpng.com/20181204/ucx/kisspng-portable-network-graphics-computer-icons-directory-sonular-trkye-modern-pentatlon-federasyonu-5c06eb5690f414.8519113715439573345937.jpg";
 
@@ -16,6 +18,7 @@
   <div class="directory-info">
     <div class="directory-name">{name}</div>
     <div class="directory-id">ID: {directoryId}</div>
+    <DeleteButton name={name} fileId={directoryId} onDeleteCallback={onDeleteCallback}/>
   </div>
 </div>
 

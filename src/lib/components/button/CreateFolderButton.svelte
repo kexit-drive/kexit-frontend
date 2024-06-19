@@ -2,6 +2,8 @@
   import { fetchService } from "$lib/fetchService";
   import {page} from "$app/stores";
 
+  export let onCreateCallback;
+
   const createFolder = async () => {
     const name = prompt("Enter directory name: ")
     if (name === "") {
@@ -16,6 +18,7 @@
           "Content-Type": "application/json",
         }
       });
+      await onCreateCallback();
       console.log("Created directory with name " + name);
     }
   }

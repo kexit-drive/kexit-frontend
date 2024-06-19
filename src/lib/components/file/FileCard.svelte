@@ -3,9 +3,11 @@
   import PlayerComponent from "../PlayerComponent.svelte";
   import { PUBLIC_BASE_URL } from "$env/static/public";
   import Modal from "../modal/Modal.svelte";
+  import DeleteButton from "$lib/components/button/DeleteButton.svelte";
 
   export let title;
   export let fileId;
+  export let onDeleteCallback;
 
   let mediaType = "";
   $: url = `${PUBLIC_BASE_URL}/file/${fileId}/play`;
@@ -49,6 +51,7 @@
   <div class="file-info">
     <div><span class="file-title">{title}</span></div>
     <div class="file-id">ID: {fileId}</div>
+    <DeleteButton name={title} fileId={fileId} onDeleteCallback={onDeleteCallback}/>
   </div>
 </div>
 

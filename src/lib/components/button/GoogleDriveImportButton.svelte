@@ -1,6 +1,7 @@
 <script>
   import { fetchService } from "$lib/fetchService";
   import { onMount } from "svelte";
+  import {page} from "$app/stores";
 
   onMount(async () => {
     console.log("onMount");
@@ -43,8 +44,10 @@
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
+    const containingDirectoryId = $page.url.searchParams.get('directoryId');
     const rawBody = JSON.stringify({
       fileIds,
+      containingDirectoryId
     });
 
     console.dir(fileIds);

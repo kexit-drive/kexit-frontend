@@ -9,7 +9,7 @@
   import DirectoryCard from "$lib/components/file/DirectoryCard.svelte";
 
   let mounted = false;
-  let files = [];
+  $: files = [];
 
   $: directoryId = $page.url.searchParams.get('directoryId');
 
@@ -33,18 +33,20 @@
     mounted = true;
   })
 
+  const updateFiles = async () => files = await getFiles(directoryId);
+
 </script>
 
 <main>
   <GoogleDriveImportButton/>
-  <UploadFileButton/>
-  <CreateFolderButton/>
+  <UploadFileButton onUploadCallback={updateFiles}/>
+  <CreateFolderButton onCreateCallback={updateFiles}/>
   <div class="file-list">
     {#each files as file}
       {#if file.isDirectory === true}
-        <DirectoryCard name={file.filename} directoryId={file.id}/>
+        <DirectoryCard name={file.filename} directoryId={file.id} onDeleteCallback={updateFiles}/>
       {:else}
-        <FileCard title={file.filename} fileId={file.id}/>
+        <FileCard title={file.filename} fileId={file.id} onDeleteCallback={updateFiles}/>
       {/if}
     {/each}
   </div>

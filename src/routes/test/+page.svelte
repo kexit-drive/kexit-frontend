@@ -1,5 +1,6 @@
 <script>
   import DirectoryCard from "$lib/components/file/DirectoryCard.svelte";
+  import DeleteButton from "$lib/components/button/DeleteButton.svelte";
 
   let fileInput;
 
@@ -45,6 +46,7 @@
 </style>
 
 
+<DeleteButton/>
 <DirectoryCard name="Direc1" directoryId="324321431"/>
 <button class="import-button" on:click={handleFileUpload}>
   Upload file
