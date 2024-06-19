@@ -4,10 +4,11 @@
   import { PUBLIC_BASE_URL } from "$env/static/public";
   import Modal from "../modal/Modal.svelte";
   import DeleteButton from "$lib/components/button/DeleteButton.svelte";
+  import {draggable} from "$lib/dnd.js";
 
   export let title;
   export let fileId;
-  export let onDeleteCallback;
+  export let refreshFilesCallback;
 
   let mediaType = "";
   $: url = `${PUBLIC_BASE_URL}/file/${fileId}/play`;
@@ -39,7 +40,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="file-card">
+<div class="file-card" use:draggable={fileId}>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <img
@@ -51,7 +52,7 @@
   <div class="file-info">
     <div><span class="file-title">{title}</span></div>
     <div class="file-id">ID: {fileId}</div>
-    <DeleteButton name={title} fileId={fileId} onDeleteCallback={onDeleteCallback}/>
+    <DeleteButton name={title} fileId={fileId} onDeleteCallback={refreshFilesCallback}/>
   </div>
 </div>
 

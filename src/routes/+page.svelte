@@ -44,9 +44,9 @@
   <div class="file-list">
     {#each files as file}
       {#if file.isDirectory === true}
-        <DirectoryCard name={file.filename} directoryId={file.id} onDeleteCallback={updateFiles}/>
+        <DirectoryCard name={file.filename} directoryId={file.id} refreshFilesCallback={updateFiles}/>
       {:else}
-        <FileCard title={file.filename} fileId={file.id} onDeleteCallback={updateFiles}/>
+        <FileCard title={file.filename} fileId={file.id} refreshFilesCallback={updateFiles}/>
       {/if}
     {/each}
   </div>
