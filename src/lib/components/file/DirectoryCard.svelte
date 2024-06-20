@@ -16,20 +16,20 @@
 </script>
 
 <div class="directory-card" on:dblclick={goIntoFolder} use:draggable={directoryId} use:dropzone={{
-  async on_dropzone(dropped_file_id) {
-    console.log(`dropped_file_id = ${dropped_file_id}`);
-
-    const body = {
-      fileId: dropped_file_id,
-      destinationDirectoryId: directoryId
-    };
-    await fetchService(`/file/move`, "POST", {
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    await refreshFilesCallback();
+  async on_dropzone(droppedFileId) {
+    if (droppedFileId !== directoryId) {
+      const body = {
+        fileId: droppedFileId,
+        destinationDirectoryId: directoryId
+      };
+      await fetchService(`/file/move`, "POST", {
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      await refreshFilesCallback();
+    }
   }
 }}>
   <img src={icon} alt="Directory Icon" class="directory-icon"/>
